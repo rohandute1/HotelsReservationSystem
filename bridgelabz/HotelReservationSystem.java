@@ -11,6 +11,8 @@ public class HotelReservationSystem {
 
     public static void findCheapestHotel(LocalDate startDate, LocalDate endDate){
         int lakewoodRate = 0, bridgewoodRate = 0, ridgewoodRate = 0;
+        int bestRatedRate = Integer.MAX_VALUE;
+        Hotel bestRatedHotel = null;
 
         while (!startDate.isAfter(endDate)) {
             DayOfWeek dayOfWeek = startDate.getDayOfWeek();
@@ -22,17 +24,15 @@ public class HotelReservationSystem {
 
             startDate = startDate.plusDays(1);
         }
+        if (bridgewoodRate < bestRatedRate || (bridgewoodRate == bestRatedRate && hotels.get(1).getRating() > bestRatedHotel.getRating())) {
+            bestRatedRate = bridgewoodRate;
+            bestRatedHotel = hotels.get(1);
+        }
         System.out.println("Hotel Name: Lakewood Rate: " + lakewoodRate + "$  Rating "+ hotels.get(0).rating);
         System.out.println("Hotel Name: Bridgewood Rate: " + bridgewoodRate + "$  Rating "+ hotels.get(1).rating);
         System.out.println("Hotel Name: Ridgewood Rate: " + ridgewoodRate + "$  Rating "+ hotels.get(2).rating);
 
-        if (lakewoodRate < bridgewoodRate && lakewoodRate < ridgewoodRate) {
-            System.out.println("Cheapest Hotel: Lakewood Total Rate: " + lakewoodRate + "$  Rating "+ hotels.get(0).rating);
-        } else if (bridgewoodRate < lakewoodRate && bridgewoodRate < ridgewoodRate) {
-            System.out.println("Cheapest Hotel: Bridgewood Total Rate: " + bridgewoodRate + "$  Rating "+ hotels.get(1).rating);
-        } else {
-            System.out.println("Cheapest Hotel: Ridgewood Total Rate: " + ridgewoodRate + "$  Rating "+ hotels.get(2).rating);
-        }
+        System.out.println("Cheapest, Best Rated Hotel: " + bestRatedHotel.getHotelName() + ", Rating: " + bestRatedHotel.getRating() + " and Total Rates: $" + bestRatedRate);
 
     }
     public static void main(String[] args) {
