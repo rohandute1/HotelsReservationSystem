@@ -8,6 +8,7 @@ import java.util.List;
 
 public class HotelReservationSystem {
     static List<Hotel> hotels=new ArrayList<>();
+
     public static void findCheapestHotel(){
         LocalDate date1 = LocalDate.of(2020, Month.SEPTEMBER,10);
         LocalDate date2 = LocalDate.of(2020,Month.SEPTEMBER,11);
@@ -29,11 +30,11 @@ public class HotelReservationSystem {
 
     }
     public static void main(String[] args) {
-        System.out.println("Welcome to hotel reservation system");
+        System.out.println("Welcome to Hotel reservation system");
 
-        Hotel Lakewood = new Hotel("Lakewood", 110);
-        Hotel Bridgewood = new Hotel("Bridgewood", 160);
-        Hotel Ridgewood = new Hotel("Ridgewood", 220);
+        Hotel Lakewood = new Hotel( "Lakewood", 110,90);
+        Hotel Bridgewood = new Hotel("Bridgewood", 160,60);
+        Hotel Ridgewood = new Hotel("Ridgewood", 220,150);
         hotels.add(Lakewood);
         hotels.add(Bridgewood);
         hotels.add(Ridgewood);

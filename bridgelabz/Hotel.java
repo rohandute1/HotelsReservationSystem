@@ -1,30 +1,37 @@
 package com.bridgelabz;
 
 public class Hotel {
-    final private String hotelName;
-    final private int rateForRegularCustomer;
+    String hotelName;
+    int weekdayRegularCustomer;
+    int weekendRegularCustomer;
 
-    public Hotel(String hotelName, int rateForRegularCustomer) {
+
+    public Hotel(String hotelName, int weekdayRegularCustomer, int weekendRegularCustomer) {
         this.hotelName = hotelName;
-        this.rateForRegularCustomer = rateForRegularCustomer;
+        this.weekdayRegularCustomer = weekdayRegularCustomer;
+        this.weekendRegularCustomer = weekendRegularCustomer;
     }
     public String getHotelName(){
         return hotelName;
     }
-    public int getRateForRegularCustomer(){
-        return rateForRegularCustomer;
+    public int getWeekdayRegularCustomer(){
+        return weekdayRegularCustomer;
+    }
+    public int getWeekendRegularCustomer(){
+        return weekendRegularCustomer;
     }
 
     @Override
     public String toString() {
         return "Hotel{" +
                 "hotelName='" + hotelName + '\'' +
-                ", rateForRegularCustomer=" + rateForRegularCustomer +
+                ", weekdayRegularCustomer=" + weekdayRegularCustomer +
+                ", weekendRegularCustomer=" + weekendRegularCustomer +
                 '}';
     }
     public int rateCalculation(String day) {
         if (day.equals("MONDAY")||day.equals("TUESDAY")||day.equals("WEDNESDAY")||day.equals("THURSDAY")||day.equals("FRIDAY")){
-            return getRateForRegularCustomer();
+            return getWeekdayRegularCustomer();
         }
         return 0;
     }
