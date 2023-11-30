@@ -48,10 +48,10 @@ public class Hotel {
                 ", weekendRewardCustomerRate=" + weekendRewardCustomerRate +
                 '}';
     }
-    public int rateCalculation(String day) {
+    public int rateCalculation(String day, boolean isRewardCustomer) {
         if (day.equals("MONDAY") || day.equals("TUESDAY") || day.equals("WEDNESDAY") || day.equals("THURSDAY") || day.equals("FRIDAY")) {
-            return getWeekdayRegularCustomer();
+            return isRewardCustomer ? getWeekdayRewardCustomerRate() : getWeekdayRegularCustomer();
         }
-        return getWeekendRegularCustomer();
+        return isRewardCustomer ? getWeekendRewardCustomerRate() : getWeekendRegularCustomer();
     }
 }
