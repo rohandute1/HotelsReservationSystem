@@ -24,9 +24,16 @@ public class HotelReservationSystem {
 
             startDate = startDate.plusDays(1);
         }
-        if (bridgewoodRate < bestRatedRate || (bridgewoodRate == bestRatedRate && hotels.get(1).getRating() > bestRatedHotel.getRating())) {
-            bestRatedRate = bridgewoodRate;
+        bestRatedHotel = hotels.get(0);  // Initialize bestRatedHotel with the first hotel
+
+        if (hotels.get(1).getRating() > bestRatedHotel.getRating()) {
             bestRatedHotel = hotels.get(1);
+            bestRatedRate = bridgewoodRate;
+        }
+
+        if (hotels.get(2).getRating() > bestRatedHotel.getRating()) {
+            bestRatedHotel = hotels.get(2);
+            bestRatedRate = ridgewoodRate;
         }
         System.out.println("Hotel Name: Lakewood Rate: " + lakewoodRate + "$  Rating "+ hotels.get(0).rating);
         System.out.println("Hotel Name: Bridgewood Rate: " + bridgewoodRate + "$  Rating "+ hotels.get(1).rating);
