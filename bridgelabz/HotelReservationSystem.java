@@ -4,6 +4,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class HotelReservationSystem {
@@ -12,7 +13,7 @@ public class HotelReservationSystem {
     public static void findCheapestHotel(LocalDate startDate, LocalDate endDate, boolean isRewardCustomer){
         try {
             List<Hotel> eligibleHotels = hotels.stream()
-                    .sorted((hotel1, hotel2) -> Integer.compare(hotel2.getRating(), hotel1.getRating()))
+                    .sorted(Comparator.comparing(Hotel::getRating).reversed())
                     .filter(hotel -> {
                         LocalDate date = startDate;
                         int totalRate = 0;
@@ -52,6 +53,6 @@ public class HotelReservationSystem {
         hotels.add(Ridgewood);
         LocalDate startDate = LocalDate.of(2020, Month.SEPTEMBER, 11);
         LocalDate endDate = LocalDate.of(2020, Month.SEPTEMBER, 12);
-        findCheapestHotel(startDate, endDate, true);
+        findCheapestHotel(startDate, endDate, false);
     }
 }
