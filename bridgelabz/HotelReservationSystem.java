@@ -9,23 +9,29 @@ import java.util.List;
 public class HotelReservationSystem {
     static List<Hotel> hotels=new ArrayList<>();
 
-    public static void findCheapestHotel(){
-        LocalDate date1 = LocalDate.of(2020, Month.SEPTEMBER,10);
-        LocalDate date2 = LocalDate.of(2020,Month.SEPTEMBER,11);
-        DayOfWeek localDate1 = date1.getDayOfWeek();
-        DayOfWeek localDate2 = date2.getDayOfWeek();
-        String day1 = String.valueOf(localDate1);
-        String day2 = String.valueOf(localDate2);
-        int add1 = hotels.get(0).rateCalculation(day1) + hotels.get(0).rateCalculation(day2);
-        int add2 = hotels.get(1).rateCalculation(day1) + hotels.get(1).rateCalculation(day2);
-        int add3 = hotels.get(2).rateCalculation(day1) + hotels.get(2).rateCalculation(day2);
+    public static void findCheapestHotel(LocalDate startDate, LocalDate endDate){
+        int lakewoodRate = 0, bridgewoodRate = 0, ridgewoodRate = 0;
 
-        if (add1 < add2 && add1 < add3) {
-            System.out.println("Hotel Name: Lakewood" + " " + "Rate:" + add1 + "$");
-        }else if (add2 < add1 && add2 < add3) {
-            System.out.println("Hotel Name: Bridgewood" + " " + "Rate:" + add2 + "$");
-        }else {
-            System.out.println("Hotel Name: Ridgewood" + " " + "Rate:" + add3 + "$");
+        while (!startDate.isAfter(endDate)) {
+            DayOfWeek dayOfWeek = startDate.getDayOfWeek();
+            String day = String.valueOf(dayOfWeek);
+
+            lakewoodRate += hotels.get(0).rateCalculation(day);
+            bridgewoodRate += hotels.get(1).rateCalculation(day);
+            ridgewoodRate += hotels.get(2).rateCalculation(day);
+
+            startDate = startDate.plusDays(1);
+        }
+        System.out.println("Hotel Name: Lakewood Rate: " + lakewoodRate + "$");
+        System.out.println("Hotel Name: Bridgewood Rate: " + bridgewoodRate + "$");
+        System.out.println("Hotel Name: Ridgewood Rate: " + ridgewoodRate + "$");
+
+        if (lakewoodRate < bridgewoodRate && lakewoodRate < ridgewoodRate) {
+            System.out.println("Cheapest Hotel: Lakewood Total Rate: " + lakewoodRate + "$");
+        } else if (bridgewoodRate < lakewoodRate && bridgewoodRate < ridgewoodRate) {
+            System.out.println("Cheapest Hotel: Bridgewood Total Rate: " + bridgewoodRate + "$");
+        } else {
+            System.out.println("Cheapest Hotel: Ridgewood Total Rate: " + ridgewoodRate + "$");
         }
 
     }
@@ -38,7 +44,8 @@ public class HotelReservationSystem {
         hotels.add(Lakewood);
         hotels.add(Bridgewood);
         hotels.add(Ridgewood);
-        System.out.println(hotels);
-        findCheapestHotel();
+        LocalDate startDate = LocalDate.of(2020, Month.SEPTEMBER, 11);
+        LocalDate endDate = LocalDate.of(2020, Month.SEPTEMBER, 12);
+        findCheapestHotel(startDate, endDate);
     }
 }
