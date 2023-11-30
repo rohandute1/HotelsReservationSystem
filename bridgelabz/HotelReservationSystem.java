@@ -9,7 +9,7 @@ import java.util.List;
 public class HotelReservationSystem {
     static List<Hotel> hotels=new ArrayList<>();
 
-    public static void findCheapestHotel(LocalDate startDate, LocalDate endDate){
+    public static void findCheapestHotel(LocalDate startDate, LocalDate endDate, boolean isRewardCustomer){
         int lakewoodRate = 0, bridgewoodRate = 0, ridgewoodRate = 0;
         int bestRatedRate = Integer.MAX_VALUE;
         Hotel bestRatedHotel = null;
@@ -18,9 +18,9 @@ public class HotelReservationSystem {
             DayOfWeek dayOfWeek = startDate.getDayOfWeek();
             String day = String.valueOf(dayOfWeek);
 
-            lakewoodRate += hotels.get(0).rateCalculation(day);
-            bridgewoodRate += hotels.get(1).rateCalculation(day);
-            ridgewoodRate += hotels.get(2).rateCalculation(day);
+            lakewoodRate += hotels.get(0).rateCalculation(day, isRewardCustomer);
+            bridgewoodRate += hotels.get(1).rateCalculation(day, isRewardCustomer);
+            ridgewoodRate += hotels.get(2).rateCalculation(day, isRewardCustomer);
 
             startDate = startDate.plusDays(1);
         }
@@ -53,6 +53,6 @@ public class HotelReservationSystem {
         hotels.add(Ridgewood);
         LocalDate startDate = LocalDate.of(2020, Month.SEPTEMBER, 11);
         LocalDate endDate = LocalDate.of(2020, Month.SEPTEMBER, 12);
-        findCheapestHotel(startDate, endDate);
+        findCheapestHotel(startDate, endDate, true);
     }
 }
