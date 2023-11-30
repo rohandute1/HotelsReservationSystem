@@ -7,7 +7,7 @@ public class Hotel {
     int rating;
     int weekdayRewardCustomerRate;
     int weekendRewardCustomerRate;
-
+    int totalRate;
 
     public Hotel(String hotelName, int weekdayRegularCustomer, int weekendRegularCustomer, int rating, int weekdayRewardCustomerRate, int weekendRewardCustomerRate) {
         this.hotelName = hotelName;
@@ -35,6 +35,13 @@ public class Hotel {
 
     public int getWeekendRewardCustomerRate() {
         return weekendRewardCustomerRate;
+    }
+    public int getTotalRate() {
+        return totalRate;
+    }
+
+    public void setTotalRate(int totalRate) {
+        this.totalRate = totalRate;
     }
 
     @Override

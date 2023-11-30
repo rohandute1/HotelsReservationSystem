@@ -10,37 +10,36 @@ public class HotelReservationSystem {
     static List<Hotel> hotels=new ArrayList<>();
 
     public static void findCheapestHotel(LocalDate startDate, LocalDate endDate, boolean isRewardCustomer){
-        int lakewoodRate = 0, bridgewoodRate = 0, ridgewoodRate = 0;
-        int bestRatedRate = Integer.MAX_VALUE;
-        Hotel bestRatedHotel = null;
+        try {
+            List<Hotel> eligibleHotels = hotels.stream()
+                    .sorted((hotel1, hotel2) -> Integer.compare(hotel2.getRating(), hotel1.getRating()))
+                    .filter(hotel -> {
+                        LocalDate date = startDate;
+                        int totalRate = 0;
+                        while (!date.isAfter(endDate)) {
+                            DayOfWeek dayOfWeek = date.getDayOfWeek();
+                            String day = dayOfWeek.toString();
+                            totalRate += hotel.rateCalculation(day, isRewardCustomer);
+                            date = date.plusDays(1);
+                        }
+                        hotel.setTotalRate(totalRate);
+                        return true;
+                    })
+                    .toList();
 
-        while (!startDate.isAfter(endDate)) {
-            DayOfWeek dayOfWeek = startDate.getDayOfWeek();
-            String day = String.valueOf(dayOfWeek);
+            if (eligibleHotels.isEmpty()) {
+                throw new RuntimeException("No eligible hotels found.");
+            }
 
-            lakewoodRate += hotels.get(0).rateCalculation(day, isRewardCustomer);
-            bridgewoodRate += hotels.get(1).rateCalculation(day, isRewardCustomer);
-            ridgewoodRate += hotels.get(2).rateCalculation(day, isRewardCustomer);
+            Hotel cheapestBestRatedHotel = eligibleHotels.get(0);
 
-            startDate = startDate.plusDays(1);
+            System.out.println("Cheapest, Best Rated Hotel: " + cheapestBestRatedHotel.getHotelName() +
+                    ", Rating: " + cheapestBestRatedHotel.getRating() +
+                    " and Total Rates: $" + cheapestBestRatedHotel.getTotalRate());
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
         }
-        bestRatedHotel = hotels.get(0);  // Initialize bestRatedHotel with the first hotel
-
-        if (hotels.get(1).getRating() > bestRatedHotel.getRating()) {
-            bestRatedHotel = hotels.get(1);
-            bestRatedRate = bridgewoodRate;
-        }
-
-        if (hotels.get(2).getRating() > bestRatedHotel.getRating()) {
-            bestRatedHotel = hotels.get(2);
-            bestRatedRate = ridgewoodRate;
-        }
-        System.out.println("Hotel Name: Lakewood Rate: " + lakewoodRate + "$  Rating "+ hotels.get(0).rating);
-        System.out.println("Hotel Name: Bridgewood Rate: " + bridgewoodRate + "$  Rating "+ hotels.get(1).rating);
-        System.out.println("Hotel Name: Ridgewood Rate: " + ridgewoodRate + "$  Rating "+ hotels.get(2).rating);
-
-        System.out.println("Cheapest, Best Rated Hotel: " + bestRatedHotel.getHotelName() + ", Rating: " + bestRatedHotel.getRating() + " and Total Rates: $" + bestRatedRate);
-
     }
     public static void main(String[] args) {
         System.out.println("Welcome to Hotel reservation system");
