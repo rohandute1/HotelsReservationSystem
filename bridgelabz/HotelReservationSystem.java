@@ -13,7 +13,7 @@ public class HotelReservationSystem {
         LocalDate date1 = LocalDate.of(2020, Month.SEPTEMBER,10);
         LocalDate date2 = LocalDate.of(2020,Month.SEPTEMBER,11);
         DayOfWeek localDate1 = date1.getDayOfWeek();
-        DayOfWeek localDate2 = date1.getDayOfWeek();
+        DayOfWeek localDate2 = date2.getDayOfWeek();
         String day1 = String.valueOf(localDate1);
         String day2 = String.valueOf(localDate2);
         int add1 = hotels.get(0).rateCalculation(day1) + hotels.get(0).rateCalculation(day2);
