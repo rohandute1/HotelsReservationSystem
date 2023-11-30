@@ -22,25 +22,25 @@ public class HotelReservationSystem {
 
             startDate = startDate.plusDays(1);
         }
-        System.out.println("Hotel Name: Lakewood Rate: " + lakewoodRate + "$");
-        System.out.println("Hotel Name: Bridgewood Rate: " + bridgewoodRate + "$");
-        System.out.println("Hotel Name: Ridgewood Rate: " + ridgewoodRate + "$");
+        System.out.println("Hotel Name: Lakewood Rate: " + lakewoodRate + "$  Rating "+ hotels.get(0).rating);
+        System.out.println("Hotel Name: Bridgewood Rate: " + bridgewoodRate + "$  Rating "+ hotels.get(1).rating);
+        System.out.println("Hotel Name: Ridgewood Rate: " + ridgewoodRate + "$  Rating "+ hotels.get(2).rating);
 
         if (lakewoodRate < bridgewoodRate && lakewoodRate < ridgewoodRate) {
-            System.out.println("Cheapest Hotel: Lakewood Total Rate: " + lakewoodRate + "$");
+            System.out.println("Cheapest Hotel: Lakewood Total Rate: " + lakewoodRate + "$  Rating "+ hotels.get(0).rating);
         } else if (bridgewoodRate < lakewoodRate && bridgewoodRate < ridgewoodRate) {
-            System.out.println("Cheapest Hotel: Bridgewood Total Rate: " + bridgewoodRate + "$");
+            System.out.println("Cheapest Hotel: Bridgewood Total Rate: " + bridgewoodRate + "$  Rating "+ hotels.get(1).rating);
         } else {
-            System.out.println("Cheapest Hotel: Ridgewood Total Rate: " + ridgewoodRate + "$");
+            System.out.println("Cheapest Hotel: Ridgewood Total Rate: " + ridgewoodRate + "$  Rating "+ hotels.get(2).rating);
         }
 
     }
     public static void main(String[] args) {
         System.out.println("Welcome to Hotel reservation system");
 
-        Hotel Lakewood = new Hotel( "Lakewood", 110,90);
-        Hotel Bridgewood = new Hotel("Bridgewood", 160,60);
-        Hotel Ridgewood = new Hotel("Ridgewood", 220,150);
+        Hotel Lakewood = new Hotel( "Lakewood", 110,90, 3);
+        Hotel Bridgewood = new Hotel("Bridgewood", 160,60, 4);
+        Hotel Ridgewood = new Hotel("Ridgewood", 220,150, 5);
         hotels.add(Lakewood);
         hotels.add(Bridgewood);
         hotels.add(Ridgewood);
